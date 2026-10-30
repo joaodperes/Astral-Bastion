@@ -2,7 +2,13 @@
 
 Significant player-visible changes should be recorded here. Use clear versions/dates after source import.
 
-## Unreleased — ideas and requests, not confirmed implemented
+## Unreleased — integration kit only (not yet in the playable game)
+
+- Added source-independent battle HUD components and styles, wave countdown/early-call scheduler with one-time energy bonus, and legible three-row faction effects including inactive zero values.
+- Added browser-unlocked synthesized battle SFX with persistent mute, an audio test control, and seven automated logic tests with GitHub Actions CI.
+- The kit is in `patches/battle-hud/`; actual gameplay integration and deployment remain blocked on importing the latest game source.
+
+## Outstanding requests — not confirmed implemented
 
 - Simplify battle panels by removing redundant instructional text.
 - Improve wave-start countdown and consider optional early wave calls for energy.

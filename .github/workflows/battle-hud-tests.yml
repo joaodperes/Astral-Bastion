@@ -1,0 +1,22 @@
+name: Battle HUD integration logic
+on:
+  push:
+    paths:
+      - 'patches/battle-hud/**'
+      - '.github/workflows/battle-hud-tests.yml'
+  pull_request:
+    paths:
+      - 'patches/battle-hud/**'
+      - '.github/workflows/battle-hud-tests.yml'
+permissions:
+  contents: read
+jobs:
+  logic:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Test timing and faction logic
+        run: npm test --prefix patches/battle-hud
