@@ -2,7 +2,14 @@
 
 Significant player-visible changes should be recorded here. Use clear versions/dates after source import.
 
-## Unreleased — integration kit only (not yet in the playable game)
+## Unreleased — independently reconstructed playable preview (not deployed)
+
+- Added a browser-playable **independent reconstruction** under `reconstruction/` using documented feature descriptions, including 32 distinct cards, four factions, 18 sectors, branching turret upgrades, core hull growth, enemy armor, overlapping waves, and local progression.
+- Integrated the newly requested uncluttered battle HUD, faction bonus rows with zero inactive values, early wave calls and synthesized, mutable sound into the reconstructed gameplay.
+- Added 24 new passing Node tests and a separate GitHub Actions workflow; browser-smoke-tested card placement, upgrade, early call and enemy spawning.
+- **Not an import of the original v3/v4.1 code.** Original account/database integration, exact economy and endless behavior remain unrecovered. No changes to live deployment.
+
+## Unreleased — integration kit only (not yet in the live game)
 
 - Added source-independent battle HUD components and styles, wave countdown/early-call scheduler with one-time energy bonus, and legible three-row faction effects including inactive zero values.
 - Added browser-unlocked synthesized battle SFX with persistent mute, an audio test control, and seven automated logic tests with GitHub Actions CI.

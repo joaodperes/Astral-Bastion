@@ -1,0 +1,24 @@
+name: Reconstructed preview tests
+on:
+  push:
+    paths:
+      - 'reconstruction/**'
+      - '.github/workflows/reconstruction-tests.yml'
+  pull_request:
+    paths:
+      - 'reconstruction/**'
+      - '.github/workflows/reconstruction-tests.yml'
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: JavaScript syntax checks
+        run: npm run check --prefix reconstruction
+      - name: Unit tests (independent reconstruction)
+        run: npm test --prefix reconstruction

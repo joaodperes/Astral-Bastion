@@ -1,6 +1,6 @@
 # Import the playable Astral Bastion source
 
-The repository currently contains **project documentation only**. The playable game is hosted separately:
+The repository contains a tested **independently reconstructed playable preview** in [\`reconstruction/\`](../reconstruction/README.md) and an isolated UI/audio integration kit, but **does not contain the original hosted game's source or backend**. The live game is hosted separately:
 
 https://astral-bastion.shadyape128.chatgpt.site/
 
@@ -9,6 +9,10 @@ A prior project session reportedly generated an `astral-bastion-source.zip` cont
 ## Available patch modules
 
 The UI and audio improvements live under [`patches/battle-hud/`](../patches/battle-hud/README.md) as a tested **integration kit**, not as a playable build. Import the latest complete game source before connecting these modules to its combat state, wave spawner and UI. Do not treat the isolated tests as proof of playable integration.
+
+## Reconstruction is not the missing v3 archive
+
+The browser-playable reconstruction is a useful development reference and may be tested independently, but it does **not** implement the original cloud saves, exact card balance, or complete account and deployment architecture. Source recovery should happen in a separate branch and original code should be preferred over approximations. See [feature parity matrix](../reconstruction/docs/RECONSTRUCTION_MATRIX.md).
 
 ## Recommended import
 
