@@ -1,0 +1,22 @@
+name: Feature request
+description: Suggest a gameplay, UX or progression improvement.
+title: "[Feature] "
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: goal
+    attributes:
+      label: Player problem or opportunity
+      description: What gameplay decision or usability issue does this address?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed solution
+    validations:
+      required: true
+  - type: textarea
+    id: tradeoffs
+    attributes:
+      label: Balance, performance and save compatibility considerations

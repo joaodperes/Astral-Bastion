@@ -1,0 +1,37 @@
+# Local dependencies and tooling
+node_modules/
+.pnpm-store/
+.yarn/cache/
+.venv/
+__pycache__/
+.pytest_cache/
+.cache/
+.vite/
+
+# Build output and tests
+dist/
+build/
+coverage/
+.nyc_output/
+playwright-report/
+test-results/
+*.tsbuildinfo
+
+# Local configuration, credentials and runtime files
+.env
+.env.*
+!.env.example
+*.local
+*.log
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# User data: never commit accounts, saves or local databases
+*.sqlite
+*.sqlite3
+*.db
+*.db-wal
+*.db-shm
+backups/
