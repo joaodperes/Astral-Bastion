@@ -1,0 +1,13 @@
+{
+  "name":"astral-bastion-reconstruction",
+  "private":true,
+  "version":"0.1.0",
+  "type":"module",
+  "description":"A source-independent, browser-playable Astral Bastion reconstruction preview. Not the original v3/v4.1 codebase.",
+  "engines":{"node":">=22.16.0"},
+  "scripts":{
+    "test":"node --test tests/*.test.mjs",
+    "check":"node --check src/app.mjs && node --check src/engine.mjs && node --check src/catalog.mjs && node --check src/storage.mjs && node --check src/waves.mjs && node --check src/audio.mjs",
+    "dev":"node scripts/server.mjs"
+  }
+}

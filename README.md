@@ -4,7 +4,7 @@
 
 **Play:** https://astral-bastion.shadyape128.chatgpt.site/
 
-> **Repository setup status:** This is the repository foundation and documentation, **not an export of the game's current executable source**. Import the latest Astral Bastion source into this repository before treating it as a buildable game or enabling deployment. See [Source import](docs/SOURCE_IMPORT.md).
+> **Source status:** The original live game source is **not** available here. This repository now contains a separately implemented [browser-playable reconstruction preview](reconstruction/README.md) with its own tests and local saves, plus the earlier battle UI/audio patch. **Neither is an export of the current live game.** See [Source import](docs/SOURCE_IMPORT.md).
 
 ## The game
 
@@ -27,6 +27,17 @@ On **29 October 2026**, the working project was reported as having **32 playable
 ## Available battle HUD integration patch (not deployed)
 
 The [battle HUD/audio integration kit](patches/battle-hud/README.md) contains source modules for wave countdowns, early wave calls, readable faction links and synthesized sound, plus seven isolated logic tests and a CI workflow. It is **not yet wired into the live game**; the actual playable source must still be imported first. To run the isolated tests, use `npm test --prefix patches/battle-hud` with Node 22.16+.
+
+## Play the reconstructed preview locally
+
+The [`reconstruction/`](reconstruction/README.md) directory contains a dependency-free, browser-playable implementation based on the documented v3→v4.1 feature descriptions, **not** the original code. It includes 32 cards, 18 sectors, energy/armor/faction gameplay, wave countdowns and early calls, and generated audio. It does not connect to live accounts or the game's database. Run:
+
+```sh
+npm test --prefix reconstruction
+npm run dev --prefix reconstruction
+```
+
+Open http://localhost:8123 in your browser. See the [feature parity matrix](reconstruction/docs/RECONSTRUCTION_MATRIX.md) before comparing this preview with the hosted game.
 
 ## Getting started
 
