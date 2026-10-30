@@ -1,0 +1,9 @@
+{
+  "name": "astral-bastion-battle-hud-integration-kit",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Source-independent battle HUD, wave director, faction links, and synthesized audio integration patch. Not a standalone game.",
+  "type": "module",
+  "engines": {"node": ">=22.16.0"},
+  "scripts": {"test": "node --experimental-strip-types --test tests/*.test.mjs"}
+}

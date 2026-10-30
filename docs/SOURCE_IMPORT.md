@@ -6,6 +6,10 @@ https://astral-bastion.shadyape128.chatgpt.site/
 
 A prior project session reportedly generated an `astral-bastion-source.zip` containing source, tests and GitHub Pages deployment setup, but that archive was unavailable during repository initialization. The game was subsequently updated, so use a fresh source export rather than an older snapshot.
 
+## Available patch modules
+
+The UI and audio improvements live under [`patches/battle-hud/`](../patches/battle-hud/README.md) as a tested **integration kit**, not as a playable build. Import the latest complete game source before connecting these modules to its combat state, wave spawner and UI. Do not treat the isolated tests as proof of playable integration.
+
 ## Recommended import
 
 1. Obtain the **latest source export** from the Astral Bastion project editor.

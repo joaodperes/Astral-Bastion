@@ -24,6 +24,10 @@ Core systems include:
 
 On **29 October 2026**, the working project was reported as having **32 playable cards plus Core Hull, four factions, and 18 campaign sectors**. The longer-term expansion target is **80 distinct playable faction cards and 30 sectors**. These are **project milestones**, not an assertion that this repository's current files implement them.
 
+## Available battle HUD integration patch (not deployed)
+
+The [battle HUD/audio integration kit](patches/battle-hud/README.md) contains source modules for wave countdowns, early wave calls, readable faction links and synthesized sound, plus seven isolated logic tests and a CI workflow. It is **not yet wired into the live game**; the actual playable source must still be imported first. To run the isolated tests, use `npm test --prefix patches/battle-hud` with Node 22.16+.
+
 ## Getting started
 
 1. Play the current build at the link above.

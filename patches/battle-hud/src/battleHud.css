@@ -1,0 +1,15 @@
+.ab-faction-link { border: 1px solid rgba(145,178,225,.28); border-radius: 10px; padding: 12px 14px; margin: 8px 0; background: rgba(10,22,45,.68); color: #eaf3ff; line-height: 1.5; font-size: 15px; }
+.ab-faction-link__name { font-size: 15px; font-weight: 800; margin-bottom: 6px; }
+.ab-faction-link__heading { font-weight: 700; color: #b4cbec; }
+.ab-faction-link__per { margin-top: 3px; color: #ecf5ff; }
+.ab-faction-link__current { margin-top: 7px; font-weight: 800; color: #72efc7; }
+.ab-faction-link.inactive .ab-faction-link__current { color: #d4dae8; }
+.ab-wave-clock { border: 1px solid #6887b8; border-radius: 12px; padding: 12px 14px; color: #edf4ff; background: #14233d; font-size: 16px; }
+.ab-wave-clock__top { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.ab-wave-clock__track { margin: 9px 0; height: 8px; background: #33445f; border-radius: 8px; overflow: hidden; }
+.ab-wave-clock__track span { display: block; height: 100%; background: #70e6da; transition: width 0.2s linear; }
+.ab-wave-clock__call, .ab-audio-controls button { border: 1px solid #a6c2e2; border-radius: 8px; background: #215b7f; color: #fff; font-size: 15px; font-weight: 700; padding: 9px 12px; cursor: pointer; }
+.ab-wave-clock__call { width: 100%; }
+.ab-wave-clock__call:disabled { opacity: .5; cursor: not-allowed; }
+.ab-audio-controls { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; font-size: 13px; color: #ccd8e9; }
+@media (max-width: 520px) { .ab-faction-link { font-size: 14px; } .ab-wave-clock { font-size: 15px; } }
