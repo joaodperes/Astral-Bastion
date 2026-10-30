@@ -28,6 +28,14 @@ On **29 October 2026**, the working project was reported as having **32 playable
 
 The [battle HUD/audio integration kit](patches/battle-hud/README.md) contains source modules for wave countdowns, early wave calls, readable faction links and synthesized sound, plus seven isolated logic tests and a CI workflow. It is **not yet wired into the live game**; the actual playable source must still be imported first. To run the isolated tests, use `npm test --prefix patches/battle-hud` with Node 22.16+.
 
+## GitHub Pages: single-player reconstructed game
+
+The repository contains a dependency-free static reconstruction that can be served through GitHub Pages after Settings → Pages → GitHub Actions is enabled. Expected URL: https://joaodperes.github.io/Astral-Bastion/ (not confirmed live until Pages deployment succeeds).
+
+The game stores progress in the browser using localStorage. No leaderboard, multiplayer server or database is required. Use Settings → Single-player save to download and restore portable JSON backups. Progress is specific to the browser/site origin, not the previous hosted game or other devices.
+
+Read the deployment instructions in docs/GITHUB_PAGES.md and the separate reconstruction README for scope limitations.
+
 ## Play the reconstructed preview locally
 
 The [`reconstruction/`](reconstruction/README.md) directory contains a dependency-free, browser-playable implementation based on the documented v3→v4.1 feature descriptions, **not** the original code. It includes 32 cards, 18 sectors, energy/armor/faction gameplay, wave countdowns and early calls, and generated audio. It does not connect to live accounts or the game's database. Run:

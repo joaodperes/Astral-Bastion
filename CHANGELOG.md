@@ -2,6 +2,12 @@
 
 Significant player-visible changes should be recorded here. Use clear versions/dates after source import.
 
+## Unreleased — GitHub Pages and single-player backups
+
+- Configured static GitHub Pages deployment workflow with syntax/unit test gates, publishing only the reconstructed browser game.
+- Added format-validated JSON save export/import with overwrite confirmation; retained original reconstruction localStorage key.
+- Documented browser-specific storage behavior, manual Pages activation, and differences from the original cloud game.
+
 ## Unreleased — independently reconstructed playable preview (not deployed)
 
 - Added a browser-playable **independent reconstruction** under `reconstruction/` using documented feature descriptions, including 32 distinct cards, four factions, 18 sectors, branching turret upgrades, core hull growth, enemy armor, overlapping waves, and local progression.

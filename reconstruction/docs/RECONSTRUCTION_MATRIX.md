@@ -20,7 +20,7 @@ Recorded reference points (not the actual source): v3 reportedly contained 24 ca
 | Six-lesson tutorial | Implemented as manual walkthrough | Lessons are text-based, not the original guided scenario; Pulse Lv 2 is the collection milestone |
 | Enemy Field Manual unlocks | Implemented | Encountered enemy types persisted locally |
 | Collections, caches and upgrades | Implemented locally | Simplified economy; not original loot odds, rotation or unlock schedule |
-| Browser persistence | Implemented | `localStorage`, new key; **not** compatible with live accounts |
+| Browser persistence | Implemented | `localStorage` with validated JSON backup and restore; **not** compatible with live accounts |
 | Cloud login / database | **Missing** | Cannot recover or infer original API, schema or access-control rules |
 | Original v3/v4.1 saves and migration | **Missing** | Never attempt to migrate existing live saves using guessed IDs |
 | Original exact campaign/card balance | **Missing** | Requires original source/artifacts and regression comparisons |

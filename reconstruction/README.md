@@ -21,6 +21,20 @@ npm run dev
 
 Then visit `http://localhost:8123` in a browser. Alternatively use any static file server from the `reconstruction` directory. Do not open `index.html` directly from `file://` as browser ES module imports are restricted in many configurations.
 
+## GitHub Pages hosting and save backups
+
+This is a static game: the GitHub Pages workflow uploads only index.html and src/ after automated validation. No database, server, login or leaderboard is required.
+
+- Expected URL after Pages is enabled: https://joaodperes.github.io/Astral-Bastion/
+- A repository administrator must enable Settings → Pages → Build and deployment → Source: GitHub Actions once. The regular GITHUB_TOKEN cannot activate Pages on an unconfigured repository.
+- The Pages workflow runs on relevant commits to main and supports manual dispatch. Source files are relative, so they work under the /Astral-Bastion/ subpath.
+- Browser localStorage keeps campaign progress, cards, currency, unlocks and audio settings. It does not sync across devices or browser profiles and is unrelated to the original chatgpt.site account.
+- In Settings → Single-player save, use Download backup (.json), then Restore backup (.json) to move progress to another browser or device. The restore validates compatible backup data and requires confirmation before replacing progress.
+- Clearing site data, private browsing or browser storage eviction can erase the save; download backups regularly. Do not commit personal save files to this public repository.
+- Game updates must preserve the local save schema or provide explicit migration tests.
+
+See docs/GITHUB_PAGES.md in the repository root. This deployment is the independent reconstruction, not recovered original source.
+
 ## Play
 
 1. Open **Campaign** and deploy to Kepler Outpost.
