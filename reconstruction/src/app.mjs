@@ -1,6 +1,7 @@
 import {CARDS,CARD_BY_ID,FACTIONS,ENEMIES,SECTORS,coreMaxHull,upgradeGoldCost,factionRows} from './catalog.mjs';
 import {Battle,routeFor} from './engine.mjs';
 import {loadSave,persistSave,cardUpgrade,coreUpgrade} from './storage.mjs';
+import {exportSaveBackup,parseSaveBackup} from './saveTransfer.mjs';
 import {GameAudio} from './audio.mjs';
 const $=sel=>document.querySelector(sel);
 const root=$('#app');const save=loadSave();const audio=new GameAudio();audio.installGestureUnlock();audio.setMuted(save.muted);
@@ -77,10 +78,29 @@ function renderManual(){shell(`<div class="eyebrow">TACTICAL INTELLIGENCE</div><
  ${section('Enemy contacts')}<div class="field-grid">${Object.entries(ENEMIES).map(([id,e])=>{const known=save.encountered.includes(id);return `<div class="tile ${known?'':'locked'}"><div class="eyebrow">${known?'CONTACT IDENTIFIED':'UNKNOWN CONTACT'}</div><h3 style="margin-top:10px">${known?esc(e.name):'Classified'}</h3>${known?`<div class="statgrid"><div>HP<strong>${e.hp}</strong></div><div>Armor<strong>${e.armor}</strong></div><div>Hull damage<strong>${e.damage}</strong></div><div>Speed<strong>${e.speed}</strong></div></div><p class="muted">${esc(e.desc)}</p>`:'<p class="muted">Encounter this enemy to reveal its field data.</p>'}</div>`}).join('')}</div>`);
  $('#tutorial').onclick=()=>{tutorialStep=0;renderTutorial()};}
 function renderEndless(){shell(`<div class="eyebrow">AFTER THE CAMPAIGN</div><h1>Endless operations</h1><div class="hero"><div class="eyebrow gold">${save.completed===18?'AVAILABLE':'LOCKED'}</div><h2 style="margin-top:18px">The frontier never sleeps.</h2><p>Finish all 18 campaign sectors on Explorer to unlock replayable survival deployments. This reconstruction offers a repeatable final-sector challenge, not yet the original infinite-wave rules.</p><button id="endless-deploy" class="primary" ${save.completed<18?'disabled':''}>${save.completed===18?'Deploy':'Clear all campaign sectors'}</button></div>`);$('#endless-deploy').onclick=startEndless}
-function renderSettings(){shell(`<div class="eyebrow">SYSTEM CONTROL</div><h1>Settings</h1><div class="grid two section"><div class="tile"><h3>Audio</h3><p class="muted">Sounds are generated procedurally in-browser. Browsers unlock sound on a user interaction.</p><button id="audio-test">Test sound</button> <button id="toggle-sound">${save.muted?'Enable':'Mute'} audio</button></div><div class="tile"><h3>Save data</h3><p class="muted">This reconstructed version uses local browser storage, isolated from the original cloud-backed game. Never import live account credentials.</p><button id="export-save">Export local save</button></div></div><div class="inline-warn section">This is an independent reconstruction preview, not the original v3 or a verified reproduction of live v4.1.</div>`);
+function renderSettings(){shell(`<div class="eyebrow">SYSTEM CONTROL</div><h1>Settings</h1><div class="grid two section"><div class="tile"><h3>Audio</h3><p class="muted">Sounds are generated procedurally in-browser. Browsers unlock sound on a user interaction.</p><button id="audio-test">Test sound</button> <button id="toggle-sound">${save.muted?'Enable':'Mute'} audio</button></div><div class="tile"><h3>Single-player save</h3><p class="muted">Progress lives in this browser. Clearing website data, private browsing, or switching browsers/devices may remove it. Back up regularly.</p><div class="row"><button id="export-save">Download backup (.json)</button><button id="import-save">Restore backup (.json)</button></div><input id="import-save-file" type="file" accept=".json,application/json" hidden><p class="muted" style="font-size:.78rem">Only reconstruction backups are supported. Restoring replaces current progress in this browser.</p></div></div><div class="inline-warn section">This is an independent reconstruction preview, not the original v3 or a verified reproduction of live v4.1.</div>`);
  $('#audio-test').onclick=async()=>{if(save.muted){notify('Unmute audio before testing');return}await audio.unlock();play('victory');notify(audio.isUnlocked?'Audio playing':'Browser audio permission unavailable')};
  $('#toggle-sound').onclick=()=>{save.muted=!save.muted;audio.setMuted(save.muted);tickSaved();renderSettings()};
- $('#export-save').onclick=()=>{const blob=new Blob([JSON.stringify(save,null,2)],{type:'application/json'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='astral-bastion-reconstruction-save.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)};
+ $('#export-save').onclick=()=>{
+  const blob=new Blob([exportSaveBackup(save)],{type:'application/json'});
+  const url=URL.createObjectURL(blob);const a=document.createElement('a');
+  a.href=url;a.download='astral-bastion-single-player-backup.json';a.click();
+  setTimeout(()=>URL.revokeObjectURL(url),1000);
+};
+ $('#import-save').onclick=()=>$('#import-save-file').click();
+ $('#import-save-file').onchange=async(e)=>{
+  const file=e.target.files?.[0];e.target.value='';if(!file)return;
+  try{
+   if(file.size>262144)throw new Error('Backup exceeds the 256 KB limit.');
+   const restored=parseSaveBackup(await file.text());
+   if(!confirm('Replace all progress saved in this browser? Export your current save first.'))return;
+   if(!persistSave(restored))throw new Error('Browser storage is unavailable; progress was not changed.');
+   Object.assign(save,restored);audio.setMuted(save.muted);
+   if(battle)battle.active=false;
+   battle=null;conclusion=null;selectedCard=null;screen='command';render();
+   notify('Backup restored in this browser.');
+  }catch(error){notify(error instanceof Error?error.message:'Could not restore backup.')}
+ };
 }
 function renderTutorial(){if(tutorialStep<0)return;const step=tutorial[Math.min(tutorialStep,5)];let old=$('.modal-cover');if(old)old.remove();const el=document.createElement('div');el.className='modal-cover';el.innerHTML=`<div class="modal" role="dialog" aria-modal="true" aria-label="Battle tutorial"><div class="eyebrow">FIELD MANUAL · LESSON ${Math.min(6,tutorialStep+1)} / 6</div><h2>${esc(step.title)}</h2><p>${esc(step.body)}</p><div class="row between section"><button id="tutorial-skip">Close</button><button id="tutorial-next" class="primary">${tutorialStep===5?'Finish lesson':'Next lesson →'}</button></div></div>`;document.body.append(el);
  $('#tutorial-skip').onclick=()=>{tutorialStep=-1;el.remove()};$('#tutorial-next').onclick=()=>{save.tutorialStep=Math.max(save.tutorialStep,tutorialStep+1);tickSaved();play('ui-select');tutorialStep++;if(tutorialStep>=6){tutorialStep=-1;el.remove();notify('Tutorial complete! Upgrade Pulse Sentry to level 2 to graduate.')}else renderTutorial()};
